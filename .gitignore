@@ -25,4 +25,4 @@ build/Release
 node_modules
 
 .DS_STORE
-.swp
+*.swp

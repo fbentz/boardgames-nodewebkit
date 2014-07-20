@@ -1,0 +1,27 @@
+{
+  "name": "boardgames",
+  "version": "0.0.0",
+  "description": "Node Webkit App on X-Wing",
+  "main": "index.html",
+  "window": {
+    "title": "boardgames",
+    "icon": "icon-boardgame.icns",
+		"width": 800,
+		"height": 600,
+    "frame": true,
+    "toolbar": true,
+    "position": "mouse"
+  },
+  "author": "Fabrice BENTZ",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.8.5",
+    "vinyl-source-stream": "^0.1.1"
+  },
+  "dependencies": {
+    "browserify": "^4.2.0",
+    "jquery": "^2.1.1",
+    "pouchdb": "^2.2.3",
+    "backbone-pouch": "^1.4.0"
+  }
+}

@@ -6,8 +6,8 @@
   "window": {
     "title": "boardgames",
     "icon": "icon-boardgame.icns",
-		"width": 800,
-		"height": 600,
+    "width": 800,
+    "height": 600,
     "frame": true,
     "toolbar": true,
     "position": "mouse"
@@ -19,9 +19,12 @@
     "vinyl-source-stream": "^0.1.1"
   },
   "dependencies": {
+    "backbone": "^1.1.2",
+    "backbone-pouch": "^1.4.0",
     "browserify": "^4.2.0",
+    "handlebars": "^2.0.0-alpha.4",
+    "hbsfy": "^2.0.0",
     "jquery": "^2.1.1",
-    "pouchdb": "^2.2.3",
-    "backbone-pouch": "^1.4.0"
+    "pouchdb": "^2.2.3"
   }
 }

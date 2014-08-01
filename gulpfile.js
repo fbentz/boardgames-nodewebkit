@@ -9,6 +9,11 @@ var opt = {
     src: './src/js/app.js',
     dest: 'app.js'
   },
+
+  copy: [
+    './src/webkit/**/*.*'
+  ],
+
   vendors: 'vendors.js',
 
   jsAssets: [
@@ -26,6 +31,11 @@ var opt = {
 };
 
 gulp.task('assets', ['assets:css', 'assets:fonts']);
+
+gulp.task('copy', function() {
+  return gulp.src(opt.copy)
+    .pipe(gulp.dest(opt.build + '/js'));
+});
 
 gulp.task("assets:css", function() {
   return gulp.src(opt.cssAssets)
@@ -77,4 +87,5 @@ gulp.task('watch', function() {
   gulp.watch(opt.jsAssets, ['build:js']);
 });
 
-gulp.task('default', ['build:js', 'assets']);
+gulp.task('default', ['build:js', 'assets', 'copy']);
+gulp.task('dev', ['build:js', 'assests']);

@@ -21,6 +21,7 @@ var opt = {
   ],
 
   cssAssets: [
+    'src/css/boardgame.css',
     'src/css/bootstrap.min.css',
     'src/css/bootstrap-theme.min.css'
   ],

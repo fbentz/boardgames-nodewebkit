@@ -1,14 +1,35 @@
 var Backbone = require('backbone');
+var BoardgamesView = require('../views/BoardgamesView');
 
 module.exports = Backbone.Router.extend({
-	routes: {
-		"boardgames": "list",
-		"boardgames/create": "create" 
-	},
+  routes: {
+    "boardgames": "list",
+    "boardgame/create": "create"
+  },
 
-	list: list
+  list: list,
+  create: create
+
 });
 
 function list() {
-	console.log('test');
+  var Boardgames = require('../models/Boardgames');
+  var boardgames = new Boardgames();
+  var listView = new BoardgamesView({
+    el: '.col-md-8',
+    collection: boardgames
+  });
+
+  listView.render();
+}
+
+function create() {
+  var Boardgame = require('../models/Boardgame');
+  var newBoardgame = new Boardgame();
+  var BoardgameCreateView = require('../views/BoardgameCreateView');
+  var form = new BoardgameCreateView({
+    el: '.col-md-8',
+    boardgame: newBoardgame
+  });
+  form.render();
 }

@@ -1,0 +1,28 @@
+<form role="form">
+	<div class="page-header">
+		<h1>Ajouter un nouveau jeu</h1>
+	</div>
+	<div class="form-group">
+		<label for="titleBoardgame" class="control-label">Titre du jeu</label>
+		<input id="titleBoardgame" class="form-control input-lg title" type="text">
+	</div>
+	<div class="form-group">
+		<div class="input-group">
+			<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+			<input class="form-control input-lg min-player" type="number" min="1" required>
+			<span class="input-group-addon">à</span>
+			<input class="form-control input-lg max-player" type="number" min="1" required>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="input-group">
+			<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+			<input class="form-control input-lg time" type="number" min="1" required>
+		</div>
+		<span class="help-block">Temps / joueur</span>
+	</div>
+	<hr>
+	<button class="btn btn-default btn-lg pull-right save">
+		Sauvegarder
+	</button>
+</form>

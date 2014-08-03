@@ -2,17 +2,17 @@ var Boardgame = require('../models/boardgame');
 var Backbone = require('backbone');
 
 module.exports = Backbone.View.extend({
-	template: require('../templates/boardgame.hbs'),
+  template: require('../templates/boardgame.hbs'),
   initialize: initialize,
-	render: render
+  render: render
 });
 
 function initialize() {
-  this.collection.fetch();
-  console.log(this.collection);
+  this.listenTo(this.collection, 'sync', this.render);
 }
 
 function render() {
-	this.$el.html(this.template());
-	return this;
+  this.$el.html(this.template());
+  return this;
 }
+

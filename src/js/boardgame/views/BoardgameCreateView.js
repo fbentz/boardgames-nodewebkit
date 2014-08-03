@@ -24,6 +24,7 @@ function render() {
 function save(e) {
   e.preventDefault();
   var title = this.$('.title').val();
+  console.log(title);
   var minPlayer = this.$('.min-player').val();
   var maxPlayer = this.$('.max-player').val();
   var time = this.$('.time').val();

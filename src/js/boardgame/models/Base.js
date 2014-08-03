@@ -7,7 +7,7 @@ Backbone.$ = $;
 
 module.exports = Backbone.Model.extend({
   sync: BackbonePouch.sync({
-    db: new PouchDB('boardgames')
+    db: PouchDB('boardgames')
   }),
   idAttribute: '_id'
 });

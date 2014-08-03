@@ -89,4 +89,4 @@ gulp.task('watch', function() {
 });
 
 gulp.task('default', ['build:js', 'assets', 'copy']);
-gulp.task('dev', ['build:js', 'assests']);
+gulp.task('dev', ['build:js', 'assets']);

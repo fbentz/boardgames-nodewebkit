@@ -19,7 +19,6 @@ function list() {
     el: '.col-md-8',
     collection: boardgames
   });
-  listView.collection.fetch();
 }
 
 function create() {

@@ -1,7 +1,10 @@
+/* global emit*/
+var _ = require('lodash');
+
 var BaseCollection = require('./BaseCollection');
 var Boardgame = require('./Boardgame');
-var _ = require('lodash');
 var db = require('./DB');
+
 module.exports = BaseCollection.extend({
   model: Boardgame,
   parse: parse,
@@ -13,8 +16,7 @@ module.exports = BaseCollection.extend({
         fun: {
           map: function map(doc) {
             if (doc.type === 'boardgame') {
-              console.log(doc);
-              emit(doc, null);
+              emit(doc, doc);
             }
           }
         }

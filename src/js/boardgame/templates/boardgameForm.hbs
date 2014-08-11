@@ -1,23 +1,28 @@
 <form role="form">
+	{{#if id}}
+		<input type="hidden" value={{id}}>
+	{{/if}}
 	<div class="page-header">
 		<h1>Ajouter un nouveau jeu</h1>
 	</div>
 	<div class="form-group">
-		<label for="titleBoardgame" class="control-label">Titre du jeu</label>
-		<input id="titleBoardgame" class="form-control input-lg title" type="text">
+		<label for="name" class="control-label">Titre du jeu</label>
+		<input id="name" class="form-control input-lg" type="text" value="{{name}}">
 	</div>
 	<div class="form-group">
 		<div class="input-group">
 			<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-			<input class="form-control input-lg min-player" type="number" min="1" required>
+			<input class="form-control input-lg" id="minPlayer" type="number" value="{{minPlayer}}" min="1" required>
 			<span class="input-group-addon">à</span>
-			<input class="form-control input-lg max-player" type="number" min="1" required>
+			<input class="form-control input-lg" id="maxPlayer" value="{{maxPlayer}}"  type="number" min="1" required>
 		</div>
 	</div>
 	<div class="form-group">
 		<div class="input-group">
-			<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
-			<input class="form-control input-lg time" type="number" min="1" required>
+			<span class="input-group-addon">
+			<i class="glyphicon glyphicon-time"></i>
+</span>
+			<input class="form-control input-lg" id="time" value="{{time}}" type="number" min="1" required>
 		</div>
 		<span class="help-block">Temps / joueur</span>
 	</div>

@@ -1,19 +1,24 @@
 var Backbone = require('backbone');
 var Boardgame = require('../models/Boardgame');
+var _ = require('lodash');
 
 module.exports = Backbone.View.extend({
   events: {
-    'click .save': 'save'
+    'click .save': 'save',
+    'change input': 'fieldChanged',
   },
   template: require('../templates/boardgameForm.hbs'),
   initialize: initialize,
   render: render,
+  fieldChanged: fieldChanged,
+  fieldValidate: fieldValidate,
+  displayValid: displayValid,
+  displayErrors: displayErrors,
   save: save
 });
 
-function initialize(options) {
-  this.boardgame = options.boardgame;
-  this.listenTo(this.boardgame, 'change', this.update);
+function initialize() {
+  this.listenTo(this.model, 'change', this.fieldValidate);
 }
 
 function render() {
@@ -21,16 +26,43 @@ function render() {
   return this;
 }
 
+function fieldChanged(e) {
+  var field = this.$(e.currentTarget);
+  var data = {};
+  data[field.attr('id')] = field.val();
+  this.model.set(data);
+}
+
+function fieldValidate(model) {
+  this.displayValid(model);
+  if (!model.isValid()) {
+    this.displayErrors(model.validationError);
+  }
+}
+
+function displayValid() {
+  _.each(this.$('form')[0], function(field) {
+    if (field.type !== 'submit') {
+      var id = '#' + field.getAttribute('id');
+      var input = this.$(id);
+      input
+        .parent()
+        .removeClass('has-error')
+        .addClass('has-success');
+    }
+  }, this);
+}
+
+function displayErrors(errors) {
+  _.each(errors, function(error) {
+    var id = '#' + error.name;
+    this.$(id).parent().addClass('has-error');
+  }, this);
+}
+
 function save(e) {
   e.preventDefault();
-  var title = this.$('.title').val();
-  console.log(title);
-  var minPlayer = this.$('.min-player').val();
-  var maxPlayer = this.$('.max-player').val();
-  var time = this.$('.time').val();
-  this.boardgame.set('title', title);
-  this.boardgame.set('minPlayer', minPlayer);
-  this.boardgame.set('maxPlayer', maxPlayer);
-  this.boardgame.set('time', time);
-  this.boardgame.save();
+  if (this.model.isValid()) {
+    this.model.save();
+  }
 }

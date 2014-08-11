@@ -10,8 +10,9 @@ module.exports = Backbone.View.extend({
 });
 
 function initialize() {
-  this.listenTo(this.collection, 'sync', this.render);
   this.listenTo(this.collection, 'add', this.onAdd);
+  this.listenTo(this.collection, 'change', this.render);
+  this.render();
   this.collection.fetch();
 }
 
@@ -19,10 +20,12 @@ function onAdd(model) {
   var boardgame = model;
 
   var view = new BoardgameItemView({
-    model: model
+    tagName: 'tr',
+    model: boardgame
   });
-  view.setElement(this.$('tbody'));
+
   view.render();
+  view.$el.appendTo(this.$('tbody'));
 }
 
 function render() {

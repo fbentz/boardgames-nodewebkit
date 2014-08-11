@@ -61,6 +61,8 @@ gulp.task('browserify:app', ['browserify:vendors'], function() {
     .external('backbone')
     .external('jquery')
     .external('backbone-pouch')
+    .external('lodash')
+    .external('handlebars')
     .transform('hbsfy')
     .bundle()
     .pipe(source(opt.app.dest))
@@ -77,6 +79,8 @@ gulp.task('browserify:vendors', function() {
     .require('backbone-pouch')
     .require('jquery')
     .require('pouchdb')
+    .require('lodash')
+    .require('handlebars')
     .bundle()
     .pipe(source(opt.vendors))
     .pipe(gulp.dest(opt.build + '/js'));

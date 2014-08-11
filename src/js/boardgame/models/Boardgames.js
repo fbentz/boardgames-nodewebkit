@@ -16,7 +16,7 @@ module.exports = BaseCollection.extend({
         fun: {
           map: function map(doc) {
             if (doc.type === 'boardgame') {
-              emit(doc, doc);
+              emit(doc.title, doc);
             }
           }
         }

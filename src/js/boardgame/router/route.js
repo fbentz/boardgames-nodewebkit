@@ -24,20 +24,34 @@ function list() {
     el: '.col-md-12',
     collection: boardgames
   });
+  boardgames.fetch();
+  listView.render();
 }
 
 function edit(id) {
+  var boardgame = new Boardgame({
+    _id: id
+  });
+  boardgame.fetch();
+  if (!this.form) {
+    this.form = new BoardgameCreateView({
+      el: '.col-md-12',
+      model: boardgame
+    });
+  }
+  this.form.model = boardgame;
+  this.form.render();
 }
 
 function create() {
   if (!this.form) {
     this.form = new BoardgameCreateView({
+      el: '.col-md-12',
       model: new Boardgame()
     });
+  } else {
+    this.form.model = new Boardgame();
   }
-
-  this.form.setElement('.col-md-12');
-
   this.form.model.on('sync', function() {
     this.navigate('boardgames', {
       trigger: true

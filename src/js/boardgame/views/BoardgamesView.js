@@ -12,8 +12,6 @@ module.exports = Backbone.View.extend({
 function initialize() {
   this.listenTo(this.collection, 'add', this.onAdd);
   this.listenTo(this.collection, 'change', this.render);
-  this.render();
-  this.collection.fetch();
 }
 
 function onAdd(model) {

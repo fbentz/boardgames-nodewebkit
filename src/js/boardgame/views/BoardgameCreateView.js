@@ -19,10 +19,11 @@ module.exports = Backbone.View.extend({
 
 function initialize() {
   this.listenTo(this.model, 'change', this.fieldValidate);
+  this.listenTo(this.model, 'sync', this.render);
 }
 
 function render() {
-  this.$el.html(this.template());
+  this.$el.html(this.template(this.model.toJSON()));
   return this;
 }
 

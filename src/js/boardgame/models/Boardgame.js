@@ -16,7 +16,7 @@ function validate(attrs, options) {
     errors.push({name: 'name', message: 'Vous devez donner un titre au jeu'});
   }
 
-  if (attrs.minPlayer > attrs.maxPlayer) {
+  if (parseInt(attrs.minPlayer, 10) > parseInt(attrs.maxPlayer, 10)) {
     errors.push({name: 'minPlayer' , message: 'Le nombre de joueur minimun doit être inférieur au joueur max'});
   }
 

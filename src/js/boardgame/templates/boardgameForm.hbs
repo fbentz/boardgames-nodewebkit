@@ -1,10 +1,14 @@
 <form role="form">
-	{{#if id}}
-		<input type="hidden" value={{id}}>
+	{{#if _id}}
+		<input type="hidden" value={{_id}}>
+		<div class="page-header">
+			<h1>Modifier {{name}}</h1>
+		</div>
+	{{else}}
+		<div class="page-header">
+			<h1>Ajouter un nouveau jeu</h1>
+		</div>
 	{{/if}}
-	<div class="page-header">
-		<h1>Ajouter un nouveau jeu</h1>
-	</div>
 	<div class="form-group">
 		<label for="name" class="control-label">Titre du jeu</label>
 		<input id="name" class="form-control input-lg" type="text" value="{{name}}">

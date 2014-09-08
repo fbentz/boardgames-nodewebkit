@@ -21,27 +21,16 @@ var opt = {
     '/src/vendors/bootstrap/dist/js/**/*.*',
   ],
 
-  cssAssets: [
-    'src/app/css/boardgame.css',
-    'src/app/css/bootstrap.min.css',
-    'src/css/bootstrap-theme.min.css'
-  ],
-
   fontAssets: [
     'src/vendors/bootstrap/dist/fonts/*'
   ]
 };
 
-gulp.task('assets', ['assets:css', 'assets:fonts']);
+gulp.task('assets', ['assets:fonts']);
 
 gulp.task('copy', function() {
   return gulp.src(opt.copy)
     .pipe(gulp.dest(opt.build + '/js'));
-});
-
-gulp.task("assets:css", function() {
-  return gulp.src(opt.cssAssets)
-    .pipe(gulp.dest(opt.build + '/css'));
 });
 
 gulp.task("assets:fonts", function() {
@@ -105,5 +94,5 @@ gulp.task('watch', function() {
   gulp.watch(opt.jsAssets, ['build:js']);
 });
 
-gulp.task('default', ['build:js', 'assets', 'copy']);
+gulp.task('default', ['build:js', 'build:less' , 'assets', 'copy']);
 gulp.task('dev', ['build:js', 'assets']);

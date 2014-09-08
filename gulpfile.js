@@ -1,33 +1,34 @@
 'use strict';
 var gulp = require('gulp');
+var less = require('gulp-less');
 var source = require('vinyl-source-stream');
 var browserify = require('browserify');
 var hbsfy = require('hbsfy');
 var opt = {
   build: 'build',
   app: {
-    src: './src/js/app.js',
+    src: './src/app/js/app.js',
     dest: 'app.js'
   },
 
   copy: [
-    './src/webkit/**/*.*'
+    './src/app/webkit/**/*.*'
   ],
 
   vendors: 'vendors.js',
 
   jsAssets: [
-    'src/js/**/*.*',
+    '/src/vendors/bootstrap/dist/js/**/*.*',
   ],
 
   cssAssets: [
-    'src/css/boardgame.css',
-    'src/css/bootstrap.min.css',
+    'src/app/css/boardgame.css',
+    'src/app/css/bootstrap.min.css',
     'src/css/bootstrap-theme.min.css'
   ],
 
   fontAssets: [
-    'src/fonts/*'
+    'src/vendors/bootstrap/dist/fonts/*'
   ]
 };
 
@@ -48,6 +49,14 @@ gulp.task("assets:fonts", function() {
     .pipe(gulp.dest(opt.build + '/fonts'));
 });
 
+gulp.task('build:less', function() {
+  return gulp.src('./src/app/less/**/*.less')
+    .pipe(less({
+      paths: ['./src/vendors/bootstrap/less']
+    }))
+    .pipe(gulp.dest(opt.build + '/css'));
+});
+
 gulp.task('build:js', [
   'browserify:app',
   'browserify:vendors'
@@ -63,6 +72,9 @@ gulp.task('browserify:app', ['browserify:vendors'], function() {
     .external('backbone-pouch')
     .external('lodash')
     .external('handlebars')
+    .require('./src/vendors/bootstrap/dist/js/bootstrap.js', {
+      expose: 'bootstrap'
+    })
     .transform('hbsfy')
     .bundle()
     .pipe(source(opt.app.dest))
@@ -81,6 +93,7 @@ gulp.task('browserify:vendors', function() {
     .require('pouchdb')
     .require('lodash')
     .require('handlebars')
+    .add('jquery')
     .bundle()
     .pipe(source(opt.vendors))
     .pipe(gulp.dest(opt.build + '/js'));

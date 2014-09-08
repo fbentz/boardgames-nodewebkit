@@ -6,17 +6,17 @@ var Boardgames = require('../models/Boardgames');
 var Boardgame = require('../models/Boardgame');
 
 module.exports = Backbone.Router.extend({
-  routes: {
-    'boardgames': 'list',
-    'boardgame/create': 'create',
-    'boardgame/:id': 'edit',
-  },
 
+  routes: {
+    'boardgames': list,
+    'boardgame/create': create,
+    'boardgame/:id': create,
+  },
   list: list,
   create: create,
-  edit: edit
 
 });
+
 
 function list() {
   var boardgames = new Boardgames();
@@ -26,22 +26,25 @@ function list() {
   });
 }
 
-function edit(id) {
-}
-
-function create() {
-  if (!this.form) {
-    this.form = new BoardgameCreateView({
-      model: new Boardgame()
+function create(id) {
+  var boardgame;
+  if (id) {
+    boardgame = new Boardgame({
+      id: id
     });
+  } else {
+    boardgame = new Boardgame();
   }
 
-  this.form.setElement('.col-md-12');
+  this.form = new BoardgameCreateView({
+    model: boardgame
+  });
 
   this.form.model.on('sync', function() {
     this.navigate('boardgames', {
       trigger: true
     });
+    this.form.remove();
   }, this);
 
   this.form.render();

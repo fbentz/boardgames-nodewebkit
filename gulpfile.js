@@ -17,10 +17,6 @@ var opt = {
 
   vendors: 'vendors.js',
 
-  jsAssets: [
-    '/src/vendors/bootstrap/dist/js/**/*.*',
-  ],
-
   fontAssets: [
     'src/vendors/bootstrap/dist/fonts/*'
   ]
@@ -82,7 +78,6 @@ gulp.task('browserify:vendors', function() {
     .require('pouchdb')
     .require('lodash')
     .require('handlebars')
-    .add('jquery')
     .bundle()
     .pipe(source(opt.vendors))
     .pipe(gulp.dest(opt.build + '/js'));
